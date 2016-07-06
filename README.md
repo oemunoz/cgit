@@ -27,8 +27,8 @@ docker build -t "cgit" .
 
 ## History
 
-160705: Basic Initial Version.
-160706: Work out of the box.
+ - 160705: Basic Initial Version.
+ - 160706: Work out of the box.
 
 ## Credits
 
