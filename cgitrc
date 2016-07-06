@@ -8,8 +8,32 @@
 root-title=Repository browser
 virtual-root=/cgit/
 
+##
+## List of common mimetypes
+##
+mimetype.gif=image/gif
+mimetype.html=text/html
+mimetype.jpg=image/jpeg
+mimetype.jpeg=image/jpeg
+mimetype.pdf=application/pdf
+mimetype.png=image/png
+mimetype.svg=image/svg+xml
 css=/cgit/cgit.css
 logo=/cgit/cgit.png
 
-scan-path=/mnt/git/
 enable-git-config=1
+
+# Format markdown, restructuredtext, manpages, text files, and html files
+# through the right converters
+source-filter=/usr/local/lib/cgit/filters/syntax-highlighting.sh
+
+##
+## Search for these files in the root of the default branch of repositories
+## for coming up with the about page:
+##
+repo.readme=doc/about.html
+about-filter=/usr/local/lib/cgit/filters/about-formatting.sh
+readme=:README.md
+readme=:readme.md
+
+scan-path=/mnt/git

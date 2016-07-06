@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER OEMS <oscaremu@gmaiil.com>
 
 RUN apt-get update && \
-    apt-get install -y curl wget supervisor xz-utils build-essential autoconf automake libtool libssl-dev apache2
+    apt-get install -y curl wget supervisor xz-utils build-essential autoconf automake libtool libssl-dev highlight python-markdown apache2 openssh-server
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -15,7 +15,9 @@ RUN mkdir -p /root/cgit \
     && echo "$MD5_CHECKSUM cgit-$CGIT_VERSION.tar.xz" | md5sum -c -  \
     && tar xf "cgit-$CGIT_VERSION.tar.xz" \
     && cd "cgit-$CGIT_VERSION" \
-    && make get-git && make && make install
+    && make get-git && make && make install \
+    && sed -i '118 s/^/#/' /usr/local/lib/cgit/filters/syntax-highlighting.sh \
+    && echo 'exec highlight --force --inline-css -f -I -O xhtml -S "$EXTENSION" 2>/dev/null' >> /usr/local/lib/cgit/filters/syntax-highlighting.sh
 
 RUN a2enmod rewrite && a2enmod cgi \
     && cd /etc/apache2/mods-enabled \
