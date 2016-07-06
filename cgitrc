@@ -6,7 +6,7 @@
 #
 
 root-title=Repository browser
-virtual-root=/cgit/
+virtual-root=/
 
 ##
 ## List of common mimetypes
@@ -18,8 +18,8 @@ mimetype.jpeg=image/jpeg
 mimetype.pdf=application/pdf
 mimetype.png=image/png
 mimetype.svg=image/svg+xml
-css=/cgit/cgit.css
-logo=/cgit/cgit.png
+css=/cgit.css
+logo=/cgit.png
 
 enable-git-config=1
 
