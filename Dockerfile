@@ -19,12 +19,14 @@ RUN mkdir -p /root/cgit \
     && sed -i '118 s/^/#/' /usr/local/lib/cgit/filters/syntax-highlighting.sh \
     && echo 'exec highlight --force --inline-css -f -I -O xhtml -S "$EXTENSION" 2>/dev/null' >> /usr/local/lib/cgit/filters/syntax-highlighting.sh
 
+ADD cgit.conf /etc/apache2/sites-available/cgit.conf
+ADD cgitrc /etc/cgitrc
+ADD supervisord.conf /etc/supervisord.conf
+
 RUN a2enmod rewrite && a2enmod cgi \
     && cd /etc/apache2/mods-enabled \
-    && ln -s ../mods-available/cgi.load cgi.load
-
-ADD cgitrc /etc/cgitrc
-ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
-ADD supervisord.conf /etc/supervisord.conf
+    && ln -s ../mods-available/cgi.load cgi.load \
+    && rm /etc/apache2/sites-enabled/000-default.conf \
+    && ln -s /etc/apache2/sites-available/cgit.conf /etc/apache2/sites-enabled/
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
