@@ -9,9 +9,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ENV CGIT_VERSION 1.0
 ENV MD5_CHECKSUM 1dbd155da1c4adc89703fb1faf249dff
 
+ADD "https://git.zx2c4.com/cgit/snapshot/cgit-$CGIT_VERSION.tar.xz" /root/cgit/
+
 RUN mkdir -p /root/cgit \
     && cd /root/cgit \
-    && wget "https://git.zx2c4.com/cgit/snapshot/cgit-$CGIT_VERSION.tar.xz" -O cgit-$CGIT_VERSION.tar.xz \
     && echo "$MD5_CHECKSUM cgit-$CGIT_VERSION.tar.xz" | md5sum -c -  \
     && tar xf "cgit-$CGIT_VERSION.tar.xz" \
     && cd "cgit-$CGIT_VERSION" \
