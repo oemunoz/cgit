@@ -1,8 +1,8 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 MAINTAINER OEMS <oscaremu@gmaiil.com>
 
 RUN apt-get update && \
-    apt-get install -y curl wget supervisor xz-utils build-essential autoconf automake libtool libssl-dev highlight python-markdown apache2 openssh-server
+    apt-get install -y curl wget supervisor xz-utils build-essential autoconf automake libtool pkg-config libssl-dev highlight python-markdown apache2 openssh-server zlib1g-dev luajit
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
